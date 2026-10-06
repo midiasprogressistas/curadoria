@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acervo — galeria de links</title>
+<meta name="description" content="Galeria dinâmica de itens com imagem, descrição e link externo.">
+<style>
+/* ============ VARIÁVEIS ============ */
+:root{
+  --bg:        #0a0c11;
+  --bg-2:      #101319;
+  --texto:     #e9ecf3;
+  --texto-2:   #98a1b4;
+  --borda:     rgba(255,255,255,.09);
+  --borda-h:   rgba(255,255,255,.22);
+  --acento:    #6ea8fe;
+  --acento-2:  #b06ef5;
+  --raio:      18px;
+  --sombra:    0 18px 45px -18px rgba(0,0,0,.9);
+  --max:       1440px;
+}
+
+*,*::before,*::after{ box-sizing:border-box }
+
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--texto);
+  font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+              "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+
+/* ============ FUNDO ANIMADO ============ */
+.fundo{
+  position:fixed; inset:0; z-index:-1; overflow:hidden;
+  background:
+    radial-gradient(1200px 700px at 15% -10%, #17203a 0%, transparent 60%),
+    radial-gradient(1000px 600px at 90% 0%, #2a1636 0%, transparent 55%),
+    var(--bg);
+}
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(90px);
+  opacity:.28;
+  will-change:transform;
+}
+.orb-1{ width:46vw; height:46vw; background:var(--acento);   top:-14vw; left:-10vw; animation:flutuar 22s ease-in-out infinite }
+.orb-2{ width:38vw; height:38vw; background:var(--acento-2); top:30vh;  right:-12vw; animation:flutuar 27s ease-in-out infinite reverse }
+.orb-3{ width:30vw; height:30vw; background:#31d0aa;        bottom:-12vw; left:35vw; animation:flutuar 32s ease-in-out infinite }
+
+@keyframes flutuar{
+  0%,100%{ transform:translate3d(0,0,0) scale(1) }
+  33%    { transform:translate3d(4vw,-3vh,0) scale(1.12) }
+  66%    { transform:translate3d(-3vw,4vh,0) scale(.94) }
+}
+
+/* ============ ESTRUTURA ============ */
+.wrap{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:clamp(24px,4vw,64px) clamp(18px,4vw,52px) 64px;
+}
+
+/* ============ CABEÇALHO ============ */
+.cabecalho{
+  max-width:760px;
+  margin-bottom:clamp(28px,4vw,52px);
+  animation:surgirBaixo .8s cubic-bezier(.2,.7,.3,1) both;
+}
+.marca{
+  display:inline-flex; align-items:center; gap:8px;
+  margin:0 0 18px;
+  padding:6px 14px 6px 10px;
+  font-size:.75rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--texto-2);
+  border:1px solid var(--borda);
+  border-radius:999px;
+  background:rgba(255,255,255,.03);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+}
+.marca::before{
+  content:""; width:7px; height:7px; border-radius:50%;
+  background:linear-gradient(135deg,var(--acento),var(--acento-2));
+  box-shadow:0 0 12px var(--acento);
+}
+
+h1{
+  margin:0 0 14px;
+  font-size:clamp(2rem,5.2vw,3.4rem);
+  line-height:1.05;
+  letter-spacing:-.035em;
+  font-weight:750;
+  background:linear-gradient(115deg,#ffffff 20%,#b9c6e6 55%,#8f7ff0 95%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+.descricao{
+  margin:0;
+  font-size:clamp(.98rem,1.6vw,1.12rem);
+  line-height:1.65;
+  color:var(--texto-2);
+  max-width:62ch;
+}
+
+/* ============ BUSCA ============ */
+.busca{
+  position:relative;
+  margin-top:26px;
+  max-width:420px;
+}
+.busca svg{
+  position:absolute; left:15px; top:50%; transform:translateY(-50%);
+  width:17px; height:17px; stroke:var(--texto-2); fill:none;
+  stroke-width:2; stroke-linecap:round; pointer-events:none;
+}
+.busca input{
+  width:100%;
+  padding:13px 16px 13px 42px;
+  font:inherit; font-size:.94rem;
+  color:var(--texto);
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--borda);
+  border-radius:999px;
+  outline:none;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  transition:border-color .25s, background .25s, box-shadow .25s;
+}
+.busca input::placeholder{ color:#6c7688 }
+.busca input:focus{
+  border-color:rgba(110,168,254,.6);
+  background:rgba(255,255,255,.06);
+  box-shadow:0 0 0 4px rgba(110,168,254,.12);
+}
+
+/* ============ GRADE FLUIDA ============ */
+.grade{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(min(100%, 258px), 1fr));
+  gap:clamp(16px,1.8vw,26px);
+}
+
+/* ============ CARTÃO ============ */
+.cartao{
+  --atraso:0ms;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
+  color:inherit;
+  border:1px solid var(--borda);
+  border-radius:var(--raio);
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+  box-shadow:var(--sombra);
+  -webkit-tap-highlight-color:transparent;
+  opacity:0;
+  transform:translateY(26px) scale(.975);
+  transition:
+    opacity .55s ease,
+    transform .55s cubic-bezier(.2,.7,.3,1),
+    border-color .3s ease,
+    box-shadow .35s ease;
+}
+.cartao.visivel{
+  opacity:1;
+  transform:none;
+}
+.cartao.visivel:hover,
+.cartao.visivel:focus-visible{
+  transform:translateY(-7px);
+  border-color:var(--borda-h);
+  box-shadow:
+    0 28px 55px -22px rgba(0,0,0,.95),
+    0 0 0 1px rgba(110,168,254,.18),
+    0 0 42px -14px rgba(110,168,254,.5);
+}
+.cartao:focus-visible{
+  outline:2px solid var(--acento);
+  outline-offset:3px;
+}
+
+/* --- imagem --- */
+.figura{
+  position:relative;
+  aspect-ratio:16/10;
+  overflow:hidden;
+  background:linear-gradient(135deg,#1a2030,#2b1f3d);
+}
+.figura img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .75s cubic-bezier(.2,.7,.3,1), filter .5s ease;
+}
+.cartao:hover .figura img,
+.cartao:focus-visible .figura img{
+  transform:scale(1.075);
+  filter:saturate(1.12) brightness(1.04);
+}
+.figura::after{                       /* véu inferior */
+  content:"";
+  position:absolute; inset:auto 0 0 0; height:55%;
+  background:linear-gradient(to top, rgba(8,10,15,.78), transparent);
+  pointer-events:none;
+}
+.fallback{                            /* usado se a imagem faltar */
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  font-size:2.6rem; font-weight:700;
+  color:rgba(255,255,255,.28);
+  letter-spacing:.05em;
+  background:linear-gradient(135deg,#1d2436,#33234a);
+}
+
+/* --- seta de link externo --- */
+.seta{
+  position:absolute; right:12px; bottom:12px; z-index:2;
+  width:36px; height:36px; border-radius:50%;
+  display:grid; place-items:center;
+  background:rgba(10,12,18,.62);
+  border:1px solid rgba(255,255,255,.16);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  color:#fff;
+  opacity:0;
+  transform:translateY(8px) scale(.85);
+  transition:opacity .3s ease, transform .38s cubic-bezier(.2,.7,.3,1), background .3s;
+}
+.seta svg{ width:15px; height:15px; stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round }
+.cartao:hover .seta,
+.cartao:focus-visible .seta{
+  opacity:1;
+  transform:none;
+  background:rgba(110,168,254,.85);
+  border-color:transparent;
+}
+
+/* --- texto --- */
+.corpo{
+  display:flex; flex-direction:column; gap:7px;
+  flex:1;
+  padding:16px 18px 20px;
+}
+.corpo h2{
+  margin:0;
+  font-size:clamp(1rem,1.15vw,1.1rem);
+  font-weight:650;
+  letter-spacing:-.015em;
+  line-height:1.3;
+}
+.corpo p{
+  margin:0;
+  font-size:.885rem;
+  line-height:1.55;
+  color:var(--texto-2);
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* ============ ESTADOS ============ */
+.status, .vazio{
+  margin:48px auto 0;
+  text-align:center;
+  color:var(--texto-2);
+  font-size:.95rem;
+}
+.status.erro{ color:#ff8b8b; max-width:60ch; line-height:1.6 }
+.status code{
+  background:rgba(255,255,255,.07);
+  padding:2px 7px; border-radius:6px; font-size:.87em;
+}
+.oculto{ display:none !important }
+
+/* ============ RODAPÉ ============ */
+.rodape{
+  margin-top:72px;
+  padding-top:26px;
+  border-top:1px solid var(--borda);
+  font-size:.82rem;
+  color:#5f6879;
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
+}
+
+/* ============ ANIMAÇÕES ============ */
+@keyframes surgirBaixo{
+  from{ opacity:0; transform:translateY(22px) }
+  to  { opacity:1; transform:none }
+}
+
+/* ============ AJUSTES PARA CELULAR ============ */
+
+/* Dispositivos sem hover: seta sempre visível */
+@media (hover: none){
+  .seta{
+    opacity:1;
+    transform:none;
+    background:rgba(10,12,18,.62);
+  }
+}
+
+/* Telas pequenas: orbs mais leves para não pesar na GPU */
+@media (max-width:640px){
+  .orb{ filter:blur(55px); opacity:.20 }
+  .orb-1{ width:70vw; height:70vw }
+  .orb-2{ width:55vw; height:55vw }
+  .orb-3{ width:45vw; height:45vw }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
+  .cartao{ opacity:1; transform:none }
+  .orb{ animation:none }
+}
+</style>
+</head>
+<body>
+
+<div class="fundo" aria-hidden="true">
+  <span class="orb orb-1"></span>
+  <span class="orb orb-2"></span>
+  <span class="orb orb-3"></span>
+</div>
+
+<div class="wrap">
+
+  <header class="cabecalho">
+    <p class="marca" id="marca">Acervo</p>
+    <h1 id="titulo">Carregando…</h1>
+    <p class="descricao" id="descricao"></p>
+
+    <div class="busca" id="buscaWrap" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+      </svg>
+      <input id="busca" type="search" placeholder="Filtrar por nome ou descrição…"
+             aria-label="Filtrar itens" autocomplete="off">
+    </div>
+  </header>
+
+  <main>
+    <div class="grade" id="grade"></div>
+    <p class="vazio" id="vazio" hidden>Nada encontrado por aqui. 🤷</p>
+    <p class="status" id="status">Carregando conteúdo…</p>
+  </main>
+
+  <footer class="rodape">
+    <span id="contador"></span>
+    <span>Feito com HTML, CSS e JavaScript puro.</span>
+  </footer>
+
+</div>
+
+<noscript>
+  <p style="text-align:center;padding:40px;color:#98a1b4">
+    Este site precisa de JavaScript ativado para exibir a galeria.
+  </p>
+</noscript>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO — tudo vem do arquivo dados.json
+   ========================================================= */
+const ARQUIVO_CONFIG = "dados.json";
+
+const el = {
+  marca:    document.getElementById("marca"),
+  titulo:   document.getElementById("titulo"),
+  descricao:document.getElementById("descricao"),
+  grade:    document.getElementById("grade"),
+  status:   document.getElementById("status"),
+  vazio:    document.getElementById("vazio"),
+  busca:    document.getElementById("busca"),
+  buscaWrap:document.getElementById("buscaWrap"),
+  contador: document.getElementById("contador")
+};
+
+let cartoes = [];
+
+/* ---------- 0. Embaralhamento (Fisher-Yates) ---------- */
+function embaralhar(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/* ---------- 1. Carrega a configuração ---------- */
+async function iniciar(){
+  try{
+    const resposta = await fetch(ARQUIVO_CONFIG, { cache: "no-cache" });
+    if(!resposta.ok) throw new Error("HTTP " + resposta.status);
+    const dados = await resposta.json();
+    renderizar(dados);
+  }catch(erro){
+    mostrarErro(erro);
+  }
+}
+
+/* ---------- 2. Renderiza o site ---------- */
+function renderizar(dados){
+  // Cópia embaralhada: cada carregamento produz uma ordem nova
+  const itens = Array.isArray(dados.itens)
+    ? embaralhar(dados.itens.slice())
+    : [];
+  const pasta = normalizarPasta(dados.pastaImagens || "imagens/");
+
+  // Textos de apresentação
+  document.title = dados.titulo ? dados.titulo + " — galeria" : document.title;
+  el.marca.textContent     = dados.marca || "Acervo";
+  el.titulo.textContent    = dados.titulo || "Galeria";
+  el.descricao.textContent = dados.descricao || "";
+  if(!dados.descricao) el.descricao.remove();
+
+  if(!itens.length){
+    el.status.textContent = "Nenhum item foi configurado em dados.json.";
+    return;
+  }
+
+  el.status.remove();
+
+  // Cria os cartões na ordem embaralhada
+  const fragmento = document.createDocumentFragment();
+  itens.forEach(function(item, indice){
+    const cartao = criarCartao(item, indice, pasta);
+    cartoes.push(cartao);
+    fragmento.appendChild(cartao);
+  });
+  el.grade.appendChild(fragmento);
+
+  // Contador + busca
+  el.contador.textContent = itens.length === 1
+    ? "1 item publicado"
+    : itens.length + " itens publicados";
+
+  if(itens.length > 3) el.buscaWrap.hidden = false;
+
+  observarCartoes();
+}
+
+/* ---------- 3. Monta um cartão ---------- */
+function criarCartao(item, indice, pasta){
+  const a = document.createElement("a");
+  a.className = "cartao";
+  a.href      = item.link || "#";
+  a.target    = "_blank";
+  a.rel       = "noopener noreferrer";
+  a.dataset.indice = indice;
+  a.dataset.busca  = ((item.nome || "") + " " + (item.descricao || "")).toLowerCase();
+  a.setAttribute("aria-label", (item.nome || "Item") + " — abre em nova aba");
+
+  /* imagem */
+  const figura = document.createElement("div");
+  figura.className = "figura";
+
+  if(item.imagem){
+    const img = document.createElement("img");
+    img.src      = pasta + item.imagem;
+    img.alt      = item.nome ? "Imagem de " + item.nome : "";
+    img.loading  = "lazy";
+    img.decoding = "async";
+    img.addEventListener("error", function(){
+      img.remove();
+      const fb = document.createElement("span");
+      fb.className = "fallback";
+      fb.textContent = (item.nome || "?").trim().charAt(0).toUpperCase();
+      figura.appendChild(fb);
+    });
+    figura.appendChild(img);
+  }else{
+    const fb = document.createElement("span");
+    fb.className = "fallback";
+    fb.textContent = (item.nome || "?").trim().charAt(0).toUpperCase();
+    figura.appendChild(fb);
+  }
+
+  /* seta */
+  const seta = document.createElement("span");
+  seta.className = "seta";
+  seta.innerHTML =
+    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+      '<path d="M7 17 17 7"></path><path d="M9 7h8v8"></path>' +
+    '</svg>';
+  figura.appendChild(seta);
+
+  /* texto */
+  const corpo = document.createElement("div");
+  corpo.className = "corpo";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = item.nome || "Sem nome";
+
+  const p = document.createElement("p");
+  p.textContent = item.descricao || "";
+
+  corpo.append(h2, p);
+  a.append(figura, corpo);
+
+  return a;
+}
+
+/* ---------- 4. Animação de entrada (stagger) ---------- */
+function observarCartoes(){
+  if(!("IntersectionObserver" in window)){
+    cartoes.forEach(c => c.classList.add("visivel"));
+    return;
+  }
+
+  const observador = new IntersectionObserver(function(entradas){
+    entradas.forEach(function(entrada){
+      if(!entrada.isIntersecting) return;
+      const alvo = entrada.target;
+      observador.unobserve(alvo);
+
+      // atraso escalonado segue a ordem visual (já embaralhada)
+      const posicao = Math.min(Number(alvo.dataset.indice) || 0, 11);
+      setTimeout(function(){
+        alvo.classList.add("visivel");
+      }, posicao * 65);
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+  cartoes.forEach(c => observador.observe(c));
+}
+
+/* ---------- 5. Filtro de busca ---------- */
+el.busca.addEventListener("input", function(){
+  const termo = el.busca.value.trim().toLowerCase();
+  let visiveis = 0;
+
+  cartoes.forEach(function(cartao){
+    const combina = !termo || cartao.dataset.busca.includes(termo);
+    cartao.classList.toggle("oculto", !combina);
+    if(combina) visiveis++;
+  });
+
+  el.vazio.hidden = visiveis > 0;
+});
+
+/* ---------- 6. Erro amigável ---------- */
+function mostrarErro(erro){
+  console.error(erro);
+  el.titulo.textContent = "Não foi possível carregar o conteúdo";
+  el.descricao.textContent = "";
+  el.status.classList.add("erro");
+  el.status.innerHTML =
+    "O arquivo <code>" + ARQUIVO_CONFIG + "</code> não pôde ser lido.<br>" +
+    "Se você abriu esta página com duplo clique (protocolo <code>file://</code>), " +
+    "o navegador bloqueia a leitura de arquivos por segurança.<br>" +
+    "Sirva a pasta por um servidor estático simples, por exemplo:<br>" +
+    "<code>python -m http.server 8000</code> e acesse " +
+    "<code>http://localhost:8000</code>.";
+}
+
+/* ---------- util ---------- */
+function normalizarPasta(p){
+  return p.endsWith("/") ? p : p + "/";
+}
+
+iniciar();
+</script>
+</body>
+</html>

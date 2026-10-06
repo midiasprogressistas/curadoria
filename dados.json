@@ -1,0 +1,146 @@
+{
+  "marca": "Acervo",
+  "titulo": "Apoie estas iniciativas",
+  "descricao": "Independentemente do resultado do segundo turno, será necessário fortalecer mídias corajosas e independentes para haver um contraponto mínimo às narrativas hegemônicas. O trabalho dessas pessoas precisa ser apoiado financeiramente e cada iniciativa oferece um caminho para tal. Sim, a situação financeira está difícil para todos, mas quem sabe talvez seja possível cancelar aquela assinatura de streaming que você nem usa direito para apoiar quem tenta fazer a diferença?",
+  "pastaImagens": "images/",
+  "itens": [
+    {
+      "nome": "revista piauí",
+      "imagem": "logo_piaui_laranja.svg",
+      "link": "https://piaui.uol.com.br/assine/",
+      "descricao": "Revista mensal de jornalismo e cultura"
+    },
+    {
+      "nome": "Intercept Brasil",
+      "imagem": "intercept.webp",
+      "link": "https://apoie.intercept.com.br/doar/",
+      "descricao": "Agência de notícias"
+    },
+    {
+      "nome": "Ponte Jornalismo",
+      "imagem": "ponte.png",
+      "link": "https://conteudo.ponte.org/tamo-junto/",
+      "descricao": "Veículo independente de jornalismo de causa"
+    },
+    {
+      "nome": "Agência Pública",
+      "imagem": "publica.png",
+      "link": "https://apoie.apublica.org/",
+      "descricao": "Agência de jornalismo investigativo independente"
+    },
+    {
+      "nome": "Noites Húngaras",
+      "imagem": "noites.webp",
+      "link": "https://paulomotoryn.substack.com/",
+      "descricao": "Newsletter de jornalismo investigativo do repórter Paulo Motoryn"
+    },
+    {
+      "nome": "Viracasacas Podcast",
+      "imagem": "viracasacas.jpg",
+      "link": "https://viracasacas.wordpress.com/apoie-o-viracasacas/",
+      "descricao": "Podcast de direito, atualidades, entretenimento, política, debates variados"
+    },
+    {
+      "nome": "Lado B do Rio",
+      "imagem": "ladob.avif",
+      "link": "https://www.ladobdorio.com.br/",
+      "descricao": "Debate a sociedade, a cultura e a política a contrapelo, pela esquerda, se contrapondo à mídia empresarial de direita"
+    },
+    {
+      "nome": "Medo e Delírio em Brasília",
+      "imagem": "medo.webp",
+      "link": "https://medoedelirioembrasilia.com.br/",
+      "descricao": "Podcast alucinado de política com as últimas notícias do que restou do Brasil"
+    },
+    {
+      "nome": "Tecnologia e Classe - TeClas",
+      "imagem": "teclas.jpg",
+      "link": "https://www.youtube.com/@TecnologiaeClasse/featured/",
+      "descricao": "Canal sobre tecnologia e luta de classes"
+    },
+    {
+      "nome": "Instituto Conhecimento Liberta - ICL",
+      "imagem": "icl.jpg",
+      "link": "https://www.youtube.com/@InstitutoConhecimentoLiberta",
+      "descricao": "Plataforma de educação e promoção do conhecimento. Séries e produções originais, além des noticiários digitais diários"
+    },
+    {
+      "nome": "Os Três News",
+      "imagem": "os3.jpg",
+      "link": "https://www.youtube.com/@otresnews",
+      "descricao": "Leandro Demori, Vivian Mesquita e Cesar Calejon fazem esse canal de jornalismo independente e crítico"
+    },
+    {
+      "nome": "Leandro Demori",
+      "imagem": "demori.jpg",
+      "link": "https://www.youtube.com/@leandrodemori",
+      "descricao": "Um dos mais importantes jornalistas brasileiros, foi diretor de redação do Intercept Brasil durante a Vaza-Jato"
+    },
+    {
+      "nome": "Anarcofino",
+      "imagem": "anarcofino.jpg",
+      "link": "https://www.youtube.com/@ocalheiros",
+      "descricao": "Análise política de Orlando Calheiros, antropólogo e pesquisador"
+    },
+    {
+      "nome": "Normose",
+      "imagem": "normose.jpg",
+      "link": "https://www.youtube.com/@Normose_",
+      "descricao": "Canal de brainstorms para quem busca reflexão e conhecimento crítico"
+    },
+    {
+      "nome": "Meteoro Brasil",
+      "imagem": "meteoro.jpg",
+      "link": "https://www.youtube.com/@MeteoroBrasil",
+      "descricao": "Canal sobre notícias, cultura pop, ciência e filosofia. Abordagem crítica e trabalho diligente"
+    },
+    {
+      "nome": "arvro",
+      "imagem": "arvro.jpg",
+      "link": "https://www.youtube.com/@arvro",
+      "descricao": "Análise política, história, cultura e crítica da extrema direita"
+    },
+    {
+      "nome": "Os Três Elementos",
+      "imagem": "3elementos.jpg",
+      "link": "https://www.youtube.com/@ostreselementos",
+      "descricao": "Divulgação científica com foco em ciência, educação, cultura e debate público"
+    },
+    {
+      "nome": "Filipe Boni",
+      "imagem": "filipeboni.jpg",
+      "link": "https://www.youtube.com/@Filipe_Boni",
+      "descricao": "Foco em sociologia da cultura, economia política, música, trabalho, crítica ao capitalismo e à extrema direita"
+    },
+    {
+      "nome": "Opera Mundi",
+      "imagem": "omundi.jpg",
+      "link": "https://www.youtube.com/@omundi",
+      "descricao": "Análise crítica, conteúdo global e o compromisso histórico com as causas populares"
+    },
+    {
+      "nome": "José Kobori",
+      "imagem": "kobori.jpg",
+      "link": "https://www.youtube.com/@josekoborioficial/featured",
+      "descricao": "Economia, mercado financeiro, crítica ao rentismo, industrialização, China e desigualdade."
+    },
+    {
+      "nome": "Farol Brasil",
+      "imagem": "farol.jpg",
+      "link": "https://www.youtube.com/@JonesManoel",
+      "descricao": "Política, história, teoria marxista, luta de classes, relações raciais e crítica ao capitalismo."
+    },
+    {
+      "nome": "Humberto Matos",
+      "imagem": "humberto.jpg",
+      "link": "https://www.youtube.com/@HumbertoMatos",
+      "descricao": "Críticas sobre economia política com pitadas de história, filosofia e sociologia"
+    },
+    {
+      "nome": "DESCE A LETRA SHOW",
+      "imagem": "desce.jpg",
+      "link": "https://www.youtube.com/@DESCEALETRASHOW",
+      "descricao": "Entretenimento com abordagem irreverente sobre política, sociedade, cultura e atualidades"
+    }
+  ]
+}
