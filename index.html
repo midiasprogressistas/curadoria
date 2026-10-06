@@ -122,81 +122,30 @@ h1{
   color:var(--texto-2);
 }
 .convite a{
-  color:var(--acento);
+  color:#ffffff;
   text-decoration:none;
-  border-bottom:1px solid rgba(110,168,254,.35);
-  transition:color .25s, border-color .25s;
+  border-bottom:1px solid rgba(255,255,255,.35);
+  transition:border-color .25s, opacity .25s;
 }
 .convite a:hover,
 .convite a:focus-visible{
-  color:#a9c8ff;
-  border-bottom-color:currentColor;
+  border-bottom-color:#ffffff;
   outline:none;
 }
 
-/* ---- botão de compartilhar ---- */
-.btn-compartilhar{
-  display:inline-flex;
+/* ---- barra de ações (busca + compartilhar) ---- */
+.barra-acoes{
+  display:flex;
   align-items:center;
-  gap:9px;
-  margin-top:22px;
-  padding:10px 18px;
-  font:inherit;
-  font-size:.9rem;
-  font-weight:600;
-  color:var(--texto);
-  background:rgba(255,255,255,.05);
-  border:1px solid var(--borda);
-  border-radius:999px;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  -webkit-backdrop-filter:blur(10px);
-  backdrop-filter:blur(10px);
-  transition:
-    background .25s ease,
-    border-color .25s ease,
-    transform .15s ease,
-    box-shadow .3s ease;
-}
-.btn-compartilhar:hover{
-  background:rgba(110,168,254,.14);
-  border-color:rgba(110,168,254,.45);
-  box-shadow:0 0 24px -8px rgba(110,168,254,.6);
-}
-.btn-compartilhar:active{
-  transform:scale(.97);
-}
-.btn-compartilhar:focus-visible{
-  outline:2px solid var(--acento);
-  outline-offset:3px;
-}
-.btn-compartilhar svg{
-  width:16px; height:16px;
-  stroke:currentColor;
-  fill:none;
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  transition:transform .35s cubic-bezier(.2,.7,.3,1);
-}
-.btn-compartilhar:hover svg{
-  transform:rotate(-8deg) scale(1.08);
+  gap:10px;
+  margin-top:26px;
 }
 
-/* estado "copiado" */
-.btn-compartilhar.copiado{
-  background:rgba(49,208,170,.16);
-  border-color:rgba(49,208,170,.55);
-  color:#8ef0d4;
-}
-.btn-compartilhar.copiado svg{
-  transform:scale(1.1);
-}
-
-/* ============ BUSCA ============ */
+/* ---- busca ---- */
 .busca{
   position:relative;
-  margin-top:26px;
+  flex:1;
+  min-width:0;
   max-width:420px;
 }
 .busca svg{
@@ -222,6 +171,51 @@ h1{
   border-color:rgba(110,168,254,.6);
   background:rgba(255,255,255,.06);
   box-shadow:0 0 0 4px rgba(110,168,254,.12);
+}
+
+/* ---- botão de compartilhar ---- */
+.btn-compartilhar{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  flex-shrink:0;
+  padding:8px 13px;
+  font:inherit;
+  font-size:.82rem;
+  font-weight:500;
+  color:#ffffff;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .15s ease;
+}
+.btn-compartilhar:hover{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.4);
+}
+.btn-compartilhar:active{
+  transform:scale(.96);
+}
+.btn-compartilhar:focus-visible{
+  outline:2px solid rgba(255,255,255,.5);
+  outline-offset:3px;
+}
+.btn-compartilhar svg{
+  width:13px; height:13px;
+  stroke:#ffffff;
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.btn-compartilhar svg circle{
+  fill:#ffffff;
+  stroke:none;
 }
 
 /* ============ GRADE FLUIDA ============ */
@@ -429,24 +423,26 @@ h1{
       Sugira iniciativas em <a href="mailto:caca@caca.com">caca@caca.com</a>
     </p>
 
-    <button class="btn-compartilhar" id="btnCompartilhar" type="button">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="18" cy="5" r="3"></circle>
-        <circle cx="6" cy="12" r="3"></circle>
-        <circle cx="18" cy="19" r="3"></circle>
-        <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line>
-        <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
-      </svg>
-      <span class="btn-texto">Compartilhar</span>
-    </button>
+    <div class="barra-acoes">
+      <div class="busca" id="buscaWrap" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+        </svg>
+        <input id="busca" type="search" placeholder="Filtrar por nome ou descrição…"
+               aria-label="Filtrar itens" autocomplete="off">
+      </div>
 
-    <div class="busca" id="buscaWrap" hidden>
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
-      </svg>
-      <input id="busca" type="search" placeholder="Filtrar por nome ou descrição…"
-             aria-label="Filtrar itens" autocomplete="off">
+      <button class="btn-compartilhar" id="btnCompartilhar" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"></line>
+          <line x1="8.6" y1="13.5" x2="15.4" y2="17.5"></line>
+        </svg>
+        <span class="btn-texto">Compartilhar</span>
+      </button>
     </div>
   </header>
 
@@ -669,6 +665,8 @@ function mostrarErro(erro){
   const btn = document.getElementById("btnCompartilhar");
   if(!btn) return;
 
+  const URL_PARA_COMPARTILHAR = "https://midiasprogressistas.github.io/curadoria/";
+
   const textoEl = btn.querySelector(".btn-texto");
   const rotuloOriginal = textoEl.textContent;
 
@@ -676,7 +674,7 @@ function mostrarErro(erro){
     const dados = {
       title: document.title,
       text:  document.querySelector('meta[name="description"]')?.content || "",
-      url:   window.location.href
+      url:   URL_PARA_COMPARTILHAR
     };
 
     // Caminho 1: Web Share API (celular + alguns desktops)
@@ -693,12 +691,12 @@ function mostrarErro(erro){
 
     // Caminho 2: copiar para a área de transferência
     try{
-      await navigator.clipboard.writeText(dados.url);
+      await navigator.clipboard.writeText(URL_PARA_COMPARTILHAR);
       feedback("Link copiado!");
     }catch{
       // Caminho 3: fallback antigo (execCommand)
       const tmp = document.createElement("textarea");
-      tmp.value = dados.url;
+      tmp.value = URL_PARA_COMPARTILHAR;
       tmp.style.position = "fixed";
       tmp.style.opacity = "0";
       document.body.appendChild(tmp);
@@ -707,7 +705,7 @@ function mostrarErro(erro){
         document.execCommand("copy");
         feedback("Link copiado!");
       }catch{
-        prompt("Copie o link abaixo:", dados.url);
+        prompt("Copie o link abaixo:", URL_PARA_COMPARTILHAR);
       }
       tmp.remove();
     }
@@ -715,11 +713,9 @@ function mostrarErro(erro){
 
   function feedback(msg){
     textoEl.textContent = msg;
-    btn.classList.add("copiado");
     clearTimeout(feedback._t);
     feedback._t = setTimeout(function(){
       textoEl.textContent = rotuloOriginal;
-      btn.classList.remove("copiado");
     }, 2200);
   }
 })();
