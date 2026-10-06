@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mídias Progressistas</title>
-<meta name="description" content="Curadoria de iniciativas para apoiar">
+<title>Acervo — galeria de links</title>
+<meta name="description" content="Galeria dinâmica de itens com imagem, descrição e link externo.">
 <style>
 /* ============ VARIÁVEIS ============ */
 :root{
@@ -112,6 +112,85 @@ h1{
   line-height:1.65;
   color:var(--texto-2);
   max-width:62ch;
+}
+
+/* ---- convite por e-mail ---- */
+.convite{
+  margin:18px 0 0;
+  font-size:.95rem;
+  line-height:1.6;
+  color:var(--texto-2);
+}
+.convite a{
+  color:var(--acento);
+  text-decoration:none;
+  border-bottom:1px solid rgba(110,168,254,.35);
+  transition:color .25s, border-color .25s;
+}
+.convite a:hover,
+.convite a:focus-visible{
+  color:#a9c8ff;
+  border-bottom-color:currentColor;
+  outline:none;
+}
+
+/* ---- botão de compartilhar ---- */
+.btn-compartilhar{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:22px;
+  padding:10px 18px;
+  font:inherit;
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--texto);
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--borda);
+  border-radius:999px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .15s ease,
+    box-shadow .3s ease;
+}
+.btn-compartilhar:hover{
+  background:rgba(110,168,254,.14);
+  border-color:rgba(110,168,254,.45);
+  box-shadow:0 0 24px -8px rgba(110,168,254,.6);
+}
+.btn-compartilhar:active{
+  transform:scale(.97);
+}
+.btn-compartilhar:focus-visible{
+  outline:2px solid var(--acento);
+  outline-offset:3px;
+}
+.btn-compartilhar svg{
+  width:16px; height:16px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1);
+}
+.btn-compartilhar:hover svg{
+  transform:rotate(-8deg) scale(1.08);
+}
+
+/* estado "copiado" */
+.btn-compartilhar.copiado{
+  background:rgba(49,208,170,.16);
+  border-color:rgba(49,208,170,.55);
+  color:#8ef0d4;
+}
+.btn-compartilhar.copiado svg{
+  transform:scale(1.1);
 }
 
 /* ============ BUSCA ============ */
@@ -293,7 +372,6 @@ h1{
   border-top:1px solid var(--borda);
   font-size:.82rem;
   color:#5f6879;
-  display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between;
 }
 
 /* ============ ANIMAÇÕES ============ */
@@ -348,7 +426,7 @@ h1{
     <p class="descricao" id="descricao"></p>
 
     <p class="convite">
-      Sugira iniciativas em <a href="mailto:midiasprogressistas@protonmail.com">midiasprogressistas@protonmail.com</a>
+      Sugira iniciativas em <a href="mailto:caca@caca.com">caca@caca.com</a>
     </p>
 
     <button class="btn-compartilhar" id="btnCompartilhar" type="button">
@@ -380,7 +458,6 @@ h1{
 
   <footer class="rodape">
     <span id="contador"></span>
-    <span>Feito com HTML, CSS e JavaScript puro.</span>
   </footer>
 
 </div>
@@ -390,9 +467,6 @@ h1{
     Este site precisa de JavaScript ativado para exibir a galeria.
   </p>
 </noscript>
-
-<script data-goatcounter="https://midiasprogressistas.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 
 <script>
 /* =========================================================
@@ -589,6 +663,66 @@ function mostrarErro(erro){
     "<code>python -m http.server 8000</code> e acesse " +
     "<code>http://localhost:8000</code>.";
 }
+
+/* ---------- 7. Botão de compartilhar ---------- */
+(function(){
+  const btn = document.getElementById("btnCompartilhar");
+  if(!btn) return;
+
+  const textoEl = btn.querySelector(".btn-texto");
+  const rotuloOriginal = textoEl.textContent;
+
+  btn.addEventListener("click", async function(){
+    const dados = {
+      title: document.title,
+      text:  document.querySelector('meta[name="description"]')?.content || "",
+      url:   window.location.href
+    };
+
+    // Caminho 1: Web Share API (celular + alguns desktops)
+    if(navigator.share){
+      try{
+        await navigator.share(dados);
+        return;
+      }catch(err){
+        // usuário cancelou o compartilhamento — não faz nada
+        if(err && err.name === "AbortError") return;
+        // se falhou por outro motivo, cai para o clipboard abaixo
+      }
+    }
+
+    // Caminho 2: copiar para a área de transferência
+    try{
+      await navigator.clipboard.writeText(dados.url);
+      feedback("Link copiado!");
+    }catch{
+      // Caminho 3: fallback antigo (execCommand)
+      const tmp = document.createElement("textarea");
+      tmp.value = dados.url;
+      tmp.style.position = "fixed";
+      tmp.style.opacity = "0";
+      document.body.appendChild(tmp);
+      tmp.select();
+      try{
+        document.execCommand("copy");
+        feedback("Link copiado!");
+      }catch{
+        prompt("Copie o link abaixo:", dados.url);
+      }
+      tmp.remove();
+    }
+  });
+
+  function feedback(msg){
+    textoEl.textContent = msg;
+    btn.classList.add("copiado");
+    clearTimeout(feedback._t);
+    feedback._t = setTimeout(function(){
+      textoEl.textContent = rotuloOriginal;
+      btn.classList.remove("copiado");
+    }, 2200);
+  }
+})();
 
 /* ---------- util ---------- */
 function normalizarPasta(p){
