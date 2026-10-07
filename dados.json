@@ -213,6 +213,12 @@
       "imagem": "lemonde.png",
       "link": "https://diplomatique.org.br/",
       "descricao": "Conjuntura, contraditório, diferenças e concordâncias em torno de agenda de democracia e equidade"
+    },
+    {
+      "nome": "Notas do Inferno",
+      "imagem": "inferno.webp",
+      "link": "https://bsky.app/profile/notasdoinferno.bsky.social",
+      "descricao": "Newsletter quinzenal sobre extremismo, por @danielaabade.bsky.social"
     }
   ]
 }
