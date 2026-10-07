@@ -150,7 +150,7 @@
     },
     {
       "nome": "Signal (App)",
-      "imagem": "signal.png",
+      "imagem": "signal.svg",
       "link": "https://signal.org/",
       "descricao": "Alternativa ao WhatsApp, privacidade real: criptografia ponta a ponta, código aberto, sem anúncios ou rastreamento"
     },
