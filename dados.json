@@ -141,6 +141,72 @@
       "imagem": "desce.jpg",
       "link": "https://www.youtube.com/@DESCEALETRASHOW",
       "descricao": "Entretenimento com abordagem irreverente sobre política, sociedade, cultura e atualidades"
+    },
+    {
+      "nome": "Mídia Ninja",
+      "imagem": "ninja.png",
+      "link": "https://midianinja.org/doe/",
+      "descricao": "Rede de comunicação livre colaborativa, produção e distribuição de informação a partir da tecnologia"
+    },
+    {
+      "nome": "Signal (App)",
+      "imagem": "signal.png",
+      "link": "https://signal.org/",
+      "descricao": "Alternativa ao WhatsApp, privacidade real: criptografia ponta a ponta, código aberto, sem anúncios ou rastreamento"
+    },
+    {
+      "nome": "Bluesky (Rede social)",
+      "imagem": "bluesky.svg",
+      "link": "https://bsky.app/",
+      "descricao": "Alternativa ao Twitter (X), protocolo aberto, feeds personalizáveis e moderação própria, sem algoritmo opressivo"
+    },
+    {
+      "nome": "Nath Finanças",
+      "imagem": "nath.jpg",
+      "link": "https://www.youtube.com/@nathfinancas",
+      "descricao": "Finanças reais para pessoas reais"
+    },
+    {
+      "nome": "Ian Neves",
+      "imagem": "ian.jpg",
+      "link": "https://www.youtube.com/@IanNevesOficial",
+      "descricao": "Informação, debate e análise política"
+    },
+    {
+      "nome": "Felipe Durante",
+      "imagem": "durante.jpg",
+      "link": "https://www.youtube.com/@FelipeDurante",
+      "descricao": "Engenheiro brasileiro que vive na China desmonta preconceitos sobre o país com a autoridade de quem mora lá"
+    },
+    {
+      "nome": "luideverso",
+      "imagem": "luide.jpg",
+      "link": "https://www.youtube.com/@luideverso",
+      "descricao": "Deboche como arma política, reagindo com humor ácido ao universo da direita"
+    },
+    {
+      "nome": "Flavio Gomes",
+      "imagem": "fg.jpg",
+      "link": "https://www.youtube.com/@FlavioGomesoficial",
+      "descricao": "Automobilismo e futebol com pegada de esquerda"
+    },
+    {
+      "nome": "Futeboteco",
+      "imagem": "futeboteco.jpg",
+      "link": "https://www.youtube.com/@TomandoUma",
+      "descricao": "Podcast de futebol com alma crítica e coração de esquerda"
+    },
+    {
+      "nome": "Elias Jabbour",
+      "imagem": "elias.jpg",
+      "link": "https://www.youtube.com/@EliasMKJabbour",
+      "descricao": "Economia, política, China, Marx e, acima de tudo, um projeto nacional de desenvolvimento ao Brasil"
+    },
+    {
+      "nome": "crisvector",
+      "imagem": "cris.jpg",
+      "link": "https://bsky.app/profile/crisvector.com",
+      "descricao": "Ilustrador e ativista"
     }
   ]
 }
