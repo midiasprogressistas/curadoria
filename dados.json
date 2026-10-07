@@ -231,6 +231,12 @@
       "imagem": "assimdissejoao.jpg",
       "link": "https://www.youtube.com/@assimdisseojoao",
       "descricao": "Conteúdo educacional para uma educação crítica e revolucionária em todas as redes"
+    },
+    {
+      "nome": "Sumaúma",
+      "imagem": "sumauma.png",
+      "link": "https://sumauma.com/",
+      "descricao": "Plataforma de jornalismo da Amazônia que conta histórias a partir da floresta e de seus povos"
     }
   ]
 }
