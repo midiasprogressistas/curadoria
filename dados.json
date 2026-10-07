@@ -225,6 +225,12 @@
       "imagem": "carrodereview.jpg",
       "link": "https://www.youtube.com/@carrodereview",
       "descricao": "Conteúdo automotivo, falando sobre consciência de classe, análise e crítica e uma boa dose de tosqueira"
+    },
+    {
+      "nome": "Assim Disse João",
+      "imagem": "assimdissejoao.jpg",
+      "link": "https://www.youtube.com/@assimdisseojoao",
+      "descricao": "Conteúdo educacional para uma educação crítica e revolucionária em todas as redes"
     }
   ]
 }
