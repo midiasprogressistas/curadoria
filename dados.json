@@ -207,6 +207,12 @@
       "imagem": "cris.png",
       "link": "https://bsky.app/profile/crisvector.com",
       "descricao": "Ilustrador e ativista"
+    },
+    {
+      "nome": "Le Monde Diplomatique Brasil",
+      "imagem": "lemonde.png",
+      "link": "https://diplomatique.org.br/",
+      "descricao": "Conjuntura, contraditório, diferenças e concordâncias em torno de agenda de democracia e equidade"
     }
   ]
 }
