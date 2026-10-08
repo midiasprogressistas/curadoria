@@ -237,6 +237,12 @@
       "imagem": "sumauma.png",
       "link": "https://sumauma.com/",
       "descricao": "Plataforma de jornalismo da Amazônia que conta histórias a partir da floresta e de seus povos"
+    },
+    {
+      "nome": "TV GGN",
+      "imagem": "ggn.jpg",
+      "link": "https://www.youtube.com/TVGGN",
+      "descricao": "Canal do Jornal GGN, veículo de jornalismo independente criado pelo premiado jornalista Luís Nassif"
     }
   ]
 }
