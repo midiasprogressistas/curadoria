@@ -231,6 +231,12 @@
       "imagem": "ggn.jpg",
       "link": "https://www.youtube.com/TVGGN",
       "descricao": "Canal do Jornal GGN, veículo de jornalismo independente criado pelo premiado jornalista Luís Nassif"
+    },
+    {
+      "nome": "Jogou Onde",
+      "imagem": "jogouonde.jpg",
+      "link": "https://www.youtube.com/@CanalJogouOnde",
+      "descricao": "Milly Lacombe e Alicia Klein conectam futebol e política com análises, entrevistas e pautas quentes"
     }
   ]
 }
